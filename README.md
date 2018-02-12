@@ -1,6 +1,8 @@
 # cdk-rancher
 
-This repository explains how to deploy Rancher 2.0alpha on Canonical Kubernetes. These steps are currently in alpha/testing phase and will most likely change. 
+This repository explains how to deploy Rancher 2.0alpha on Canonical Kubernetes. 
+
+These steps are currently in alpha/testing phase and will most likely change. 
 
 ## Deploy Canonical Kubernetes
 
@@ -246,9 +248,10 @@ calvinh@ubuntu-ws:~/Source/cdk-rancher$ kubectl logs -f rancher-6d45d9d655-4b9fn
 
 ## Useful Links
 
+- [https://github.com/kubernetes/kubectl/issues/276](https://github.com/kubernetes/kubectl/issues/276) 
 - [http://rancher.com/docs/rancher/v2.0/en/quick-start-guide/](http://rancher.com/docs/rancher/v2.0/en/quick-start-guide/)
 - [https://kubernetes.io/docs/getting-started-guides/ubuntu/installation/](https://kubernetes.io/docs/getting-started-guides/ubuntu/installation/)
 - [https://github.com/rancher/rancher](https://github.com/rancher/rancher)
-- [https://hub.docker.com/r/rancher/server/tags/)](https://hub.docker.com/r/rancher/server/tags/)
+- [https://hub.docker.com/r/rancher/server/tags/](https://hub.docker.com/r/rancher/server/tags/)
 - [https://github.com/juju-solutions/bundle-canonical-kubernetes](https://github.com/juju-solutions/bundle-canonical-kubernetes)
 - [https://github.com/juju-solutions/bundle-canonical-kubernetes/wiki/Authorization-Mode-and-RBAC](https://github.com/juju-solutions/bundle-canonical-kubernetes/wiki/Authorization-Mode-and-RBAC)
