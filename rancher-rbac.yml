@@ -1,0 +1,60 @@
+---
+apiVersion: rbac.authorization.k8s.io/v1beta1
+kind: ClusterRoleBinding
+metadata:
+  name: cluster-admin
+subjects:
+  - kind: ServiceAccount
+    name: default
+    namespace: default
+roleRef:
+  kind: ClusterRole
+  name: cluster-admin
+  apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: rbac.authorization.k8s.io/v1beta1
+kind: ClusterRole
+metadata:
+  name: cluster-admin
+rules:
+- apiGroups:
+  - '*'
+  resources:
+  - '*'
+  verbs:
+  - '*'
+- nonResourceURLs:
+  - '*'
+  verbs:
+  - '*'
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: rancher
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: rancher
+    spec:
+      containers:
+      - image: rancher/server:preview
+        imagePullPolicy: Always
+        name: cattle
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: rancher-service
+spec:
+  type: NodePort
+  selector:
+    app: rancher
+  ports:
+  - name: rancher-api
+    protocol: TCP
+    nodePort: 30443
+    port: 443
+    targetPort: 443
