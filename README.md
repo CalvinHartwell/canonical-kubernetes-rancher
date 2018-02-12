@@ -168,9 +168,9 @@ You can check the deployment status using the following command:
  watch --color juju status --color
 ```
 
-Note that this will give you the default bundle for CDK which is made up of 9 machines, flannel networking and no RBAC. This is based on the default bundle found here: (https://jujucharms.com/canonical-kubernetes/)[https://jujucharms.com/canonical-kubernetes/]. 
+Note that this will give you the default bundle for CDK which is made up of 9 machines, flannel networking and no RBAC. This is based on the default bundle found here: [https://jujucharms.com/canonical-kubernetes/](https://jujucharms.com/canonical-kubernetes/).
 
-For a more tailored build with Canal or Calico, you can use the bundle builder: (https://github.com/juju-solutions/bundle-canonical-kubernetes)[https://github.com/juju-solutions/bundle-canonical-kubernetes]. This will generate a bundle file, which is just a big piece of yaml which describes the configuration for the entire cluster, similar to an Ansible Playbook or Puppet Manifest. 
+For a more tailored build with Canal or Calico, you can use the bundle builder: [https://github.com/juju-solutions/bundle-canonical-kubernetes](https://github.com/juju-solutions/bundle-canonical-kubernetes). This will generate a bundle file, which is just a big piece of yaml which describes the configuration for the entire cluster, similar to an Ansible Playbook or Puppet Manifest. 
 
 If you have a custom bundle, you would deploy that using a command like this instead:
 
@@ -246,9 +246,9 @@ calvinh@ubuntu-ws:~/Source/cdk-rancher$ kubectl logs -f rancher-6d45d9d655-4b9fn
 
 ## Useful Links
 
-- (http://rancher.com/docs/rancher/v2.0/en/quick-start-guide/)[http://rancher.com/docs/rancher/v2.0/en/quick-start-guide/]
-- (https://kubernetes.io/docs/getting-started-guides/ubuntu/installation/)[https://kubernetes.io/docs/getting-started-guides/ubuntu/installation/]
-- (https://github.com/rancher/rancher)[https://github.com/rancher/rancher]
-- (https://hub.docker.com/r/rancher/server/tags/)[https://hub.docker.com/r/rancher/server/tags/]
-- (https://github.com/juju-solutions/bundle-canonical-kubernetes)[https://github.com/juju-solutions/bundle-canonical-kubernetes]
-- (https://github.com/juju-solutions/bundle-canonical-kubernetes/wiki/Authorization-Mode-and-RBAC)[https://github.com/juju-solutions/bundle-canonical-kubernetes/wiki/Authorization-Mode-and-RBAC]
+- [http://rancher.com/docs/rancher/v2.0/en/quick-start-guide/](http://rancher.com/docs/rancher/v2.0/en/quick-start-guide/)
+- [https://kubernetes.io/docs/getting-started-guides/ubuntu/installation/](https://kubernetes.io/docs/getting-started-guides/ubuntu/installation/)
+- [https://github.com/rancher/rancher](https://github.com/rancher/rancher)
+- [https://hub.docker.com/r/rancher/server/tags/)](https://hub.docker.com/r/rancher/server/tags/)
+- [https://github.com/juju-solutions/bundle-canonical-kubernetes](https://github.com/juju-solutions/bundle-canonical-kubernetes)
+- [https://github.com/juju-solutions/bundle-canonical-kubernetes/wiki/Authorization-Mode-and-RBAC](https://github.com/juju-solutions/bundle-canonical-kubernetes/wiki/Authorization-Mode-and-RBAC)

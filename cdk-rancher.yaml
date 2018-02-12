@@ -76,7 +76,7 @@ metadata:
  name: rancher
 spec:
  rules:
-   - host: rancher.34.244.44.16.xip.io
+   - host: rancher.34.245.51.149.xip.io
      http:
        paths:
          - path: /
