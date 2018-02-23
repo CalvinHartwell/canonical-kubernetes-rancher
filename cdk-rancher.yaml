@@ -1,3 +1,33 @@
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: cluster-admin
+subjects:
+  - kind: ServiceAccount
+    name: default
+    namespace: default
+roleRef:
+   kind: ClusterRole
+   name: cluster-admin
+   apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: cluster-admin
+rules:
+- apiGroups:
+  - '*'
+  resources:
+  - '*'
+  verbs:
+  - '*'
+- nonResourceURLs:
+  - '*'
+  verbs:
+  - '*'
+---
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
@@ -22,20 +52,9 @@ spec:
       - image: rancher/server:preview
         imagePullPolicy: Always
         name: rancher
-        volumeMounts:
-        - name : kubeconfig
-          mountPath: "/etc/kubernetes/"
-          readOnly: true
-        env:
-        - name: KUBECONFIG
-          value: "/etc/kubernetes/config"
         ports:
         - containerPort: 80
-          hostPort: 8080
-          protocol: TCP
         - containerPort: 443
-          hostPort: 8081
-          protocol: TCP
         livenessProbe:
           httpGet:
             path: /
@@ -43,10 +62,6 @@ spec:
           initialDelaySeconds: 5
           timeoutSeconds: 30
         resources: {}
-      volumes:
-         - name: kubeconfig
-           secret:
-            secretName: kubeconfig
       restartPolicy: Always
       serviceAccountName: ""
 status: {}
@@ -62,11 +77,11 @@ spec:
     - port: 80
       name: rancher-http
       protocol: TCP
-      targetPort: 8080
+      targetPort: 80
     - port: 443
       name: rancher-https
       protocol: TCP
-      targetPort: 8081
+      targetPort: 443
   selector:
     app: rancher
 ---
@@ -76,7 +91,7 @@ metadata:
  name: rancher
 spec:
  rules:
-   - host: rancher.35.178.64.182.xip.io
+   - host: rancher.35.178.130.245.xip.io
      http:
        paths:
          - path: /
