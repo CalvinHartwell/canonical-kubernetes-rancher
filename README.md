@@ -206,7 +206,7 @@ InfluxDB is running at https://34.253.164.197:443/api/v1/namespaces/kube-system/
 To further debug and diagnose cluster problems, use 'kubectl cluster-info dump'
 ```
 
-## Deployment of Rancher
+## Deploying Rancher
 
 To deploy Rancher, we just need to run the Rancher container workload on-top of Kubernetes. Rancher provides their containers through dockerhub ([https://hub.docker.com/r/rancher/server/tags/](https://hub.docker.com/r/rancher/server/tags/)) and can be downloaded freely from the internet. If you're running your own registry or have an offline deployment, the container should be downloaded and pushed to the private registry.  
 
@@ -246,10 +246,11 @@ Using Rancher through an ingress rule is currently not working, but this will be
 
 ### Removing Rancher
 
-If you wish to remove rancher from the cluster, we can do it using kubectl. These commands are useful if you want to re-test a deployment of Rancher:
+If you wish to remove rancher from the cluster, we can do it using kubectl. Deleting constructs in Kubernetes is as simple as creating them: 
 
 ```
- 
+  # If you used the nodeport example change the yaml filename if you used the ingress example. 
+  kubectl delete -f cdk-rancher-nodeport.yaml
 ```
 
 ## Using Rancher
