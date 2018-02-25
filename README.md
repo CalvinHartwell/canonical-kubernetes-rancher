@@ -257,6 +257,8 @@ If you wish to remove rancher from the cluster, we can do it using kubectl. Dele
 
 Rancher can be accessed using it's web interface but a CLI client is planned in the future. 
 
+The best resource for using Rancher is the official manual found here: [http://rancher.com/docs/rancher/v2.0/en/quick-start-guide/](http://rancher.com/docs/rancher/v2.0/en/quick-start-guide/). 
+
 Hit the Rancher IP in your browser, you should see a login prompt: 
 
 ![rancher login page](https://raw.githubusercontent.com/CalvinHartwell/cdk-rancher/master/images/rancher-login.png "Rancher Web GUI Login Page") 
@@ -267,7 +269,12 @@ Once you've set the password, you should see a GUI like this:
 
 ![rancher gui page](https://raw.githubusercontent.com/CalvinHartwell/cdk-rancher/master/images/rancher-gui.png "Rancher Web GUI Page")
 
-###
+### The Rancher GUI
+
+The Rancher GUI has three main views, each of which 
+
+![rancher gui cluster page](https://raw.githubusercontent.com/CalvinHartwell/cdk-rancher/master/images/rancher-gui-cluster.png "Rancher Web GUI Cluster")
+
 ###
 ### 
 
