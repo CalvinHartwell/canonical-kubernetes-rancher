@@ -255,10 +255,20 @@ If you wish to remove rancher from the cluster, we can do it using kubectl. Dele
 
 ## Using Rancher
 
-Rancher can be accessed using it's web interface but a CLI client is planned in the future. Hit the Rancher IP in your browser, you should see a login prompt: 
+Rancher can be accessed using it's web interface but a CLI client is planned in the future. 
+
+Hit the Rancher IP in your browser, you should see a login prompt: 
 
 ![rancher login page](https://raw.githubusercontent.com/CalvinHartwell/cdk-rancher/master/images/rancher-login.png "Rancher Web GUI Login Page") 
 
+The default username is admin and password is admin. You should be prompted to change them, it is recommended you use a strong password. 
+
+Once you've set the password, you should see a GUI like this: 
+
+![rancher gui page](https://raw.githubusercontent.com/CalvinHartwell/cdk-rancher/master/images/rancher-gui.png "Rancher Web GUI Page")
+
+###
+###
 ### 
 
 ## Conclusion
