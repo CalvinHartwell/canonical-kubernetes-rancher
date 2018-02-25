@@ -208,46 +208,63 @@ To further debug and diagnose cluster problems, use 'kubectl cluster-info dump'
 
 ## Deployment of Rancher
 
-To deploy Rancher, first we create a secret inside Kubernetes of the kube configuration file: 
+To deploy Rancher, we just need to run the Rancher container workload on-top of Kubernetes. Rancher provides their containers through dockerhub ([https://hub.docker.com/r/rancher/server/tags/](https://hub.docker.com/r/rancher/server/tags/)) and can be downloaded freely from the internet. If you're running your own registry or have an offline deployment, the container should be downloaded and pushed to the private registry.  
+
+### Deploying Rancher with a nodeport
+
+The yaml file called cdk-rancher-nodeport.yaml inside this repository can be used to deploy Rancher with a nodeport for accessing the cluster. Once kubectl is running and working, run the following command to deploy Rancher: 
 
 ```
-  # kubectl does not seem to understand ~ in the from-file path, bug is open for this. 
-  kubectl create secret generic kubeconfig --from-file=/home/<your-user>/.kube/config
+  kubectl apply -f cdk-rancher-nodeport.yaml
 ```
 
-Next we deploy the Rancher bundle located inside this repository. Note that on the ingress rule for rancher there is a hostname like this:
+Now we need to open this nodeport so we can access it. For that, we can use juju. We need to run the open-port command for each of the worker nodes in our cluster. Inside the cdk-rancher-nodeport.yaml file, the nodeport has been set to 30443. Below shows how to open the port on each of the worker nodes:
 
 ```
- - host: rancher.34.244.44.16.xip.io
+   # repeat this for each kubernetes worker in the cluster. 
+   juju run --unit kubernetes-worker/0 "open-port 30443"
+   juju run --unit kubernetes-worker/1 "open-port 30443"
+   juju run --unit kubernetes-worker/2 "open-port 30443"
 ```
 
-This should be changed to one of the ip addresses of the worker nodes in your cluster. This will allow you to access your Rancher instance in your web browser using:
+Rancher can now be accessed on this port through a worker IP or DNS entries if you have created them. Try opening it up in your browser:  
 
 ```
- https://rancher.34.244.44.16.xip.io or http://rancher.34.244.44.16.xip.io
+  # replace the IP address with one of your Kubernetes worker, find this from juju status command. 
+  wget https://35.178.130.245.xip.io:30443 --no-check-certificate
 ```
 
-Once the hostname has been modified, deploy the Rancher workload to the cluster:
+If you need to make any changes to the kubernetes configuration file, edit the yaml file and then just use apply again: 
 
 ```
-kubectl apply -f cdk-rancher.yaml
+  kubectl apply -f cdk-rancher-nodeport.yaml
 ```
 
-Then you can follow the logs for the container: 
+### Deploying Rancher with an ingress rule
+
+Using Rancher through an ingress rule is currently not working, but this will be fixed shortly. The cdk-rancher-ingress.yaml yaml file contains an example Kubernetes configuration for deploying Rancher with an ingress rule. If you use an ingress rule, you don't need to use the nodeport or open additional ports using juju. 
+
+### Removing Rancher
+
+If you wish to remove rancher from the cluster, we can do it using kubectl. These commands are useful if you want to re-test a deployment of Rancher:
 
 ```
-calvinh@ubuntu-ws:~/Source/cdk-rancher$ kubectl get po
-NAME                             READY     STATUS              RESTARTS   AGE
-default-http-backend-s2fr2       1/1       Running             0          14m
-nginx-ingress-controller-8fz79   1/1       Running             0          13m
-nginx-ingress-controller-lprsw   1/1       Running             0          13m
-nginx-ingress-controller-wvfzx   1/1       Running             0          14m
-rancher-6d45d9d655-4b9fn         0/1       ContainerCreating   0          6s
-calvinh@ubuntu-ws:~/Source/cdk-rancher$ kubectl logs -f rancher-6d45d9d655-4b9fn
+ 
 ```
+
+## Using Rancher
+
+Rancher can be accessed using it's web interface but a CLI client is planned in the future. 
+
+### 
+
+## Conclusion
+
+This documentation has explained how to configure and deploy Canonical Kubernetes with Rancher running on top. It also provided a short introduction on how to use Rancher to control and manage Canonical Kubernetes. Note that this documentation was written at the time of the Rancher 2.0 alpha but a beta release is due out very soon which would be a better release candidate. 
 
 ## Useful Links
 
+- [http://rancher.com/docs/rancher/latest/en/quick-start-guide/](http://rancher.com/docs/rancher/latest/en/quick-start-guide/)
 - [https://github.com/kubernetes/kubectl/issues/276](https://github.com/kubernetes/kubectl/issues/276) 
 - [http://rancher.com/docs/rancher/v2.0/en/quick-start-guide/](http://rancher.com/docs/rancher/v2.0/en/quick-start-guide/)
 - [https://kubernetes.io/docs/getting-started-guides/ubuntu/installation/](https://kubernetes.io/docs/getting-started-guides/ubuntu/installation/)
