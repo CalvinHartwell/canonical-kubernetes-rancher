@@ -32,7 +32,7 @@ The software versions used are:
 
 ### Getting Help & Support
 
-This document was written by Calvin Hartwell, please feel to drop me an email on [calvin.hartwell@canonical.com](calvin.hartwell@canonical.com). 
+This document was written by [Calvin Hartwell](https://www.linkedin.com/in/calvinhartwell), please feel to drop me an email on [calvin.hartwell@canonical.com](calvin.hartwell@canonical.com). 
 
 To open issues with CDK, please open an issue with the repository here [https://github.com/juju-solutions/bundle-canonical-kubernetes](https://github.com/juju-solutions/bundle-canonical-kubernetes). If you want professional support for Kubernetes please contact Canonical Sales [https://www.ubuntu.com/kubernetes](https://www.ubuntu.com/kubernetes). 
 
