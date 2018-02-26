@@ -408,7 +408,7 @@ Hit the add Cluster button and you should be at another screen which asks you wh
 
 Hit the Import an Existing Cluster option and move onto the next screen: 
 
-![rancher gui clusters](https://raw.githubusercontent.com/CalvinHartwell/cdk-rancher/master/images/rancher-gui-add-cluster-kubectl.png "Rancher Artifactory Kubectl")
+![rancher gui clusters](https://raw.githubusercontent.com/CalvinHartwell/cdk-rancher/master/images/rancher-gui-add-cluster-kubeconf.png "Rancher Artifactory Kubectl")
 
 This next screen allows you to specify a name for the cluster and provide the kubeconfig file (the same configuration file used for kubectl) which is used to control and authenticate with the cluster. Give the new cluster a name and hit the Read from a file button to import your kubeconfig file or manually copy and paste the contents of the kubeconfig from its file. Note you will nee to SCP this file from your newly provisioned CDK cluster. 
 
