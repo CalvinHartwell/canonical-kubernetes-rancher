@@ -1,4 +1,4 @@
-# cdk-rancher
+# Canonical Kubernetes with Rancher (cdk-rancher)
 
 This repository explains how to deploy Rancher 2.0alpha on Canonical Kubernetes. 
 
@@ -184,7 +184,7 @@ Eventually the colours will all turn green and your cluster is good to go. To ac
 
 ```
  # If this does not work, try adding the --classic option on the end. 
- snap install kubectl
+ snap install kubectl --classic
 ```
 
 Next we copy over the configuration file: 
@@ -341,6 +341,12 @@ Linux hello-ubuntu 4.4.0-1050-aws #59-Ubuntu SMP Tue Jan 30 19:57:10 UTC 2018 x8
 
 The workloads interface can also be used to destroy, reprovision, clone and perform many other tasks on workloads running on Kubernetes. 
 
+### Deploying a Workload with Service and Ingress Rules
+
+Typically a workload on-top of Kubernetes should be run with Ingress Rules and Services. The Rancher interface allows us to easily define, manipulate and create these Kubernetes constructs. 
+
+We will start by deploying a new  
+
 ### Deploying a Workload with Rancher Catalog
 
 **_*Please note: The example here is not working but it is being worked on._**
@@ -384,13 +390,17 @@ Hit the Launch button and you should see the list of available app within the Ca
 
 ![rancher gui catalogapps](https://raw.githubusercontent.com/CalvinHartwell/cdk-rancher/master/images/rancher-gui-catalog-apps.png "Rancher Catalog Launch")
 
-Let's try and launch Artifactory. Find JFrog Artifactory in the list of apps and hit View Details. Use the default values and then hit Launch at the bottom of the page: 
+Let's try and launch Artifactory. Find JFrog Artifactory in the list of apps and hit View Details. Use the default values but make sure you change the SSL Certificate option to reflect the newly created SSL Certificate and then hit Launch at the bottom of the page: 
 
 ![rancher gui catalogapps](https://raw.githubusercontent.com/CalvinHartwell/cdk-rancher/master/images/rancher-gui-artifactory.png "Rancher Artifactory Launch")
 
-### Adding another Cluster to Rancher
+Rancher will now attempt to deploy Artifactory from the Helm Catalogue automatically on-top of Kubernetes. 
 
-It is also possible to add additional clusters to Rancher. This  
+### Adding additional Kubernetes Clusters to Rancher
+
+It is also possible to add additional clusters to Rancher. This is done by providing Rancher with the kubectl configuration file, which Rancher uses to take control of the additional clusters. Highlight the Global menu in the top-left and press it, and then go to Clusters. You should see a menu like this below: 
+
+![rancher gui catalogapps](https://raw.githubusercontent.com/CalvinHartwell/cdk-rancher/master/images/rancher-gui-artifactory.png "Rancher Artifactory Launch")
 
 ### Troubleshooting 
 
