@@ -323,6 +323,23 @@ Hit the Deploy button at the Top Right and you should see an interface like this
 
 ![rancher gui wkdeploy](https://raw.githubusercontent.com/CalvinHartwell/cdk-rancher/master/images/rancher-gui-workloads-deploy-pod.png "Rancher Web GUI Deploy Pod")
 
+Fill in details and then hit the Launch button. Congratulations, you've just ran your first Ubuntu workload on CDK using Rancher. 
+
+To interact with the new container, you can enter an interactive session using the following command: 
+
+```
+# My workstation. 
+calvinh@ubuntu-ws:~/Source/cdk-rancher$ uname -a
+Linux ubuntu-ws 4.13.0-17-generic #20-Ubuntu SMP Mon Nov 6 10:04:08 UTC 2017 x86_64 x86_64 x86_64 GNU/Linux
+
+# SSH into the Docker Container and check the container kernel version. 
+calvinh@ubuntu-ws:~/Source/cdk-rancher$ kubectl exec -it hello-ubuntu -- /bin/bash
+root@hello-ubuntu:/# uname -a
+Linux hello-ubuntu 4.4.0-1050-aws #59-Ubuntu SMP Tue Jan 30 19:57:10 UTC 2018 x86_64 x86_64 x86_64 GNU/Linux
+```
+
+The workloads interface can also be used to destroy, reprovision, clone and perform many other tasks on workloads running on Kubernetes. 
+
 ### Deploying a Workload with Rancher Catalog
 
 Rancher can also launch a workload using the Rancher catalog. First hover over the Global option in the top left-hand part of the menu. Once the menu appears, click Default at the bottom to select the Default project. 
