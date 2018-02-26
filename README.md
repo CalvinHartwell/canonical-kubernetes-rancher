@@ -379,11 +379,11 @@ Next, hit the Catalog Apps button, you should see a screen like this:
 
 Hit the Launch button and you should see the list of available app within the Catalogue, including Hadoop, Jenkins, Artifactory, F5 Load Balancer, Confluence, and many other applications. The default catalog is provided by Helm, but it is possible to create your own if required:
 
-![rancher gui catalogapps](https://raw.githubusercontent.com/CalvinHartwell/cdk-rancher/master/images/rancher-gui-catalog-launch.png "Rancher Catalog Launch")
+![rancher gui catalogapps](https://raw.githubusercontent.com/CalvinHartwell/cdk-rancher/master/images/rancher-gui-catalog-apps.png "Rancher Catalog Launch")
 
 Let's try and launch Artifactory. Find JFrog Artifactory in the list of apps and hit View Details. Use the default values and then hit Launcha the bottom of the page: 
 
-![rancher gui catalogapps](https://raw.githubusercontent.com/CalvinHartwell/cdk-rancher/master/images/rancher-gui-catalog-launch.png "Rancher Artifactory Launch")
+![rancher gui catalogapps](https://raw.githubusercontent.com/CalvinHartwell/cdk-rancher/master/images/rancher-gui-catalog-artifactory.png "Rancher Artifactory Launch")
 
 ### Adding another Cluster to Rancher
 
