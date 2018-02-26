@@ -7,8 +7,6 @@ These steps are currently in alpha/testing phase and will most likely change.
 ### Index
 
 - [Canonical Kubernetes with Rancher](https://github.com/CalvinHartwell/cdk-rancher#canonical-kubernetes-with-rancher-cdk-rancher)
-  - [Software versions]()
-  - [Getting Help & Support]()
 - [Deploying Canonical Kubernetes](https://github.com/CalvinHartwell/cdk-rancher#deploy-canonical-kubernetes)
 - [Deploying Rancher](https://github.com/CalvinHartwell/cdk-rancher#deploying-rancher)
   - [Deploying Rancher with a nodeport](https://github.com/CalvinHartwell/cdk-rancher#deploying-rancher-with-a-nodeport)
@@ -22,6 +20,8 @@ These steps are currently in alpha/testing phase and will most likely change.
   - [Adding additional Kubernetes Clusters to Rancher](https://github.com/CalvinHartwell/cdk-rancher#adding-additional-kubernetes-clusters-to-rancher)
   - [Troubleshooting Rancher](https://github.com/CalvinHartwell/cdk-rancher#troubleshooting-rancher)
 - [Conclusion](https://github.com/CalvinHartwell/cdk-rancher#conclusion)
+  - [Software versions](https://github.com/CalvinHartwell/cdk-rancher#software-versions)
+  - [Getting Help & Support](https://github.com/CalvinHartwell/cdk-rancher#getting-help--support)
 - [Useful Links](https://github.com/CalvinHartwell/cdk-rancher#useful-links)
 
 ## Deploying Canonical Kubernetes
