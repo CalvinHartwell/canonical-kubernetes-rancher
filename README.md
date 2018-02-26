@@ -242,7 +242,35 @@ If you need to make any changes to the kubernetes configuration file, edit the y
 
 ### Deploying Rancher with an ingress rule
 
-Using Rancher through an ingress rule is currently not working, but this will be fixed shortly. The cdk-rancher-ingress.yaml yaml file contains an example Kubernetes configuration for deploying Rancher with an ingress rule. If you use an ingress rule, you don't need to use the nodeport or open additional ports using juju. 
+*Please note: The ingress rule example here is currently not working but is being worked on.
+
+The cdk-rancher-ingress.yaml yaml file contains an example Kubernetes configuration for deploying Rancher with an ingress rule. If you use an ingress rule, you don't need to use the nodeport or open additional ports using juju. 
+
+However, you do need to modify the example bundle to change the hostname the ingress rule is using: 
+
+```
+  cat cdk-rancher-ingress.yaml | grep xip.io
+  - host: rancher.35.178.130.245.xip.io
+```
+
+The hostname in the example should be changed to reflect a resolvable DNS entry for your workers. You can use the xip.io service for testing, just change the IP address in the entry to reflect the IP address of one of your workers. Next apply the kubernetes work load:
+
+```
+ kubectl apply -f cdk-rancher-ingress.yaml
+```
+
+Rancher can now be accessed on the regular 443 through a worker IP or DNS entries if you have created them. Try opening it up in your browser:
+
+```
+  # replace the IP address with one of your Kubernetes worker, find this from juju status command.
+  wget https://35.178.130.245.xip.io:443 --no-check-certificate
+```
+
+If you need to make any changes to the kubernetes configuration file, edit the yaml file and then just use apply again:
+
+```
+  kubectl apply -f cdk-rancher-ingress.yaml
+```
 
 ### Removing Rancher
 
@@ -271,16 +299,24 @@ Once you've set the password, you should see a GUI like this:
 
 ### The Rancher GUI
 
-The Rancher GUI has three main views, each of which 
+The Rancher GUI has three main views, each of which has its own set of sub-menus.  
 
 ![rancher gui cluster page](https://raw.githubusercontent.com/CalvinHartwell/cdk-rancher/master/images/rancher-gui-cluster.png "Rancher Web GUI Cluster")
 
-###
-### 
+These are the three main views which contain a set of sub-menus: 
+- Global View: Provides a view of each of the Kubernetes clusters under Rancher's control. This provides a break down of Nodes, Node Drivers, Catalogs, Users and Security Settings.   
+- Cluster: This provides a view of of an individual Kubernetes cluster. It allows you to download the kubeconfig file for a cluster, check basic cluster stats, namespaces, projects, nodes and users for a particular cluster. 
+- Namespace: This provides a view for an individual Namespace defined on a Kubernetes cluster. It allows you to configure workloads, DNS entries, ingress rules, volumes, secrets, registries, certificates and most importantly, the catalog. 
+
+### Deploying a Workload with Rancher
+
+
+
+### Adding another Cluster to Rancher
 
 ## Conclusion
 
-This documentation has explained how to configure and deploy Canonical Kubernetes with Rancher running on top. It also provided a short introduction on how to use Rancher to control and manage Canonical Kubernetes. Note that this documentation was written at the time of the Rancher 2.0 alpha but a beta release is due out very soon which would be a better release candidate. 
+This documentation has explained how to configure and deploy Canonical Kubernetes with Rancher running on top. It also provided a short introduction on how to use Rancher to control and manage Canonical Kubernetes. Note that this documentation was written at the time of the Rancher 2.0 alpha but a beta release is due out very soon which would be a better release candidate for a production environment. 
 
 ## Useful Links
 
