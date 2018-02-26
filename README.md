@@ -6,8 +6,7 @@ These steps are currently in alpha/testing phase and will most likely change.
 
 ### Index
 
-- [Canonical Kubernetes with Rancher](https://github.com/CalvinHartwell/cdk-rancher#canonical-kubernetes-with-rancher-cdk-rancher)
-- [Deploying Canonical Kubernetes](https://github.com/CalvinHartwell/cdk-rancher#deploy-canonical-kubernetes)
+- [Deploying Canonical Kubernetes](https://github.com/CalvinHartwell/cdk-rancher#deploying-canonical-kubernetes)
 - [Deploying Rancher](https://github.com/CalvinHartwell/cdk-rancher#deploying-rancher)
   - [Deploying Rancher with a nodeport](https://github.com/CalvinHartwell/cdk-rancher#deploying-rancher-with-a-nodeport)
   - [Deploying Rancher with an ingress rule](https://github.com/CalvinHartwell/cdk-rancher#deploying-rancher-with-an-ingress-rule)
@@ -226,6 +225,8 @@ InfluxDB is running at https://34.253.164.197:443/api/v1/namespaces/kube-system/
 
 To further debug and diagnose cluster problems, use 'kubectl cluster-info dump'
 ```
+
+**__Note: There are two other ways CDK would be deployed, either using [Conjure-up](https://tutorials.ubuntu.com/tutorial/install-kubernetes-with-conjure-up#0) or using the graphical juju-as-a-service tool provided at [https://jujucharms.com/](https://jujucharms.com/).__** 
 
 ## Deploying Rancher
 
