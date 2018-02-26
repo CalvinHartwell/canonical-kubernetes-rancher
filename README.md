@@ -309,23 +309,87 @@ These are the three main views which contain a set of sub-menus:
 
 - Cluster: This provides a view of of an individual Kubernetes cluster. It allows you to download the kubeconfig file for a cluster, check basic cluster stats, namespaces, projects, nodes and users for a particular cluster. 
 
-- Namespace: This provides a view for an individual Namespace defined on a Kubernetes cluster. It allows you to configure workloads, DNS entries, ingress rules, volumes, secrets, registries, certificates and most importantly, the catalog. 
+- Project: This provides a view for a project defined on a Kubernetes cluster. It allows you to configure workloads, DNS entries, ingress rules, volumes, secrets, registries, certificates and most importantly, the catalog. 
 
-Essentially each of these different views is a drill-down from the top level. The Global view provides a high-level overview for all of the clusters it has control over, where as the namespace view is the lowest level you can drill down into within a cluster. 
+Essentially each of these different views is a drill-down from the top level. The Global view provides a high-level overview for all of the clusters it has control over, where as the project view is the lowest level you can drill down into within a cluster. 
 
 ### Deploying a Workload with Rancher
 
-Once Rancher is up and running we can launch a workload on-top using the Rancher catalog. First hover over the Global option in the top left-hand part of the menu. Once the menu appears, click Default to select the Default namespace. 
+Once Rancher is up and running, we can launch a regular Kubernetes workload. First hover over the Global option in the top left-hand part of the menu. Once the menu appears, click Default at the bottom to select the Default project. Next, hit the Workloads Tab: 
+
+![rancher gui workloads](https://raw.githubusercontent.com/CalvinHartwell/cdk-rancher/master/images/rancher-gui-workloads.png "Rancher Web GUI Workloads")
+
+Hit the Deploy button at the Top Right and you should see an interface like this:
+
+![rancher gui wkdeploy](https://raw.githubusercontent.com/CalvinHartwell/cdk-rancher/master/images/rancher-gui-workloads-deploy-pod.png "Rancher Web GUI Deploy Pod")
+
+### Deploying a Workload with Rancher Catalog
+
+Rancher can also launch a workload using the Rancher catalog. First hover over the Global option in the top left-hand part of the menu. Once the menu appears, click Default at the bottom to select the Default project. 
+
+First lets add an SSL certificate and private key for use within our default project. First generate your private key and certificate: 
+
+```
+ calvinh@ubuntu-ws:~/Documents/Rancher$ openssl req -newkey rsa:4096 -nodes -keyout key.pem -x509 -days 365 -out certificate.pem
+Generating a 4096 bit RSA private key
+.....................................................................++
+........................................................................................................++
+writing new private key to 'key.pem'
+-----
+You are about to be asked to enter information that will be incorporated
+into your certificate request.
+What you are about to enter is what is called a Distinguished Name or a DN.
+There are quite a few fields but you can leave some blank
+For some fields there will be a default value,
+If you enter '.', the field will be left blank.
+-----
+Country Name (2 letter code) [AU]:GB
+State or Province Name (full name) [Some-State]:London
+Locality Name (eg, city) []:London
+Organization Name (eg, company) [Internet Widgits Pty Ltd]:Canonical LTD
+Organizational Unit Name (eg, section) []:CPE
+Common Name (e.g. server FQDN or YOUR name) []:35.178.130.245.xip.io
+Email Address []:calvin.hartwell@canonical.com
+```
+
+This will create two files, certificate.pem and key.pem. Back on the Rancher GUI, go to Resources -> and then Certificates. Give your certificate a name, and import your private key and certificate file either by selecting the files on Disk or by copying and pasting the content into the boxes manually. You can also choose which namespace it should be assigned. Hit the save button when you're done: 
+
+![rancher certs](https://raw.githubusercontent.com/CalvinHartwell/cdk-rancher/master/images/rancher-gui-add-cert.png "Rancher Add Certs")
 
 Next, hit the Catalog Apps button, you should see a screen like this: 
 
-![rancher gui cluster](https://raw.githubusercontent.com/CalvinHartwell/cdk-rancher/master/images/rancher-gui-cluster.png "Rancher Catalog Launch")
+![rancher gui catalog](https://raw.githubusercontent.com/CalvinHartwell/cdk-rancher/master/images/rancher-gui-catalog-launch.png "Rancher Catalog Launch")
+
+Hit the Launch button and you should see the list of available app within the Catalogue, including Hadoop, Jenkins, Artifactory, F5 Load Balancer, Confluence, and many other applications. The default catalog is provided by Helm, but it is possible to create your own if required:
+
+![rancher gui catalogapps](https://raw.githubusercontent.com/CalvinHartwell/cdk-rancher/master/images/rancher-gui-catalog-launch.png "Rancher Catalog Launch")
+
+Let's try and launch Artifactory. Find JFrog Artifactory in the list of apps and hit View Details. Use the default values and then hit Launcha the bottom of the page: 
+
+![rancher gui catalogapps](https://raw.githubusercontent.com/CalvinHartwell/cdk-rancher/master/images/rancher-gui-catalog-launch.png "Rancher Artifactory Launch")
 
 ### Adding another Cluster to Rancher
+
+### Troubleshooting 
+
+If for any reason the Rancher pod becomes unresponsive, you can bounce the pod using the following command:
+
+```
+  # Replace the apply with your rancher yaml file. 
+  kubectl delete po $(kubectl get po | grep rancher | cut -d ' ' -f1) && kubectl apply -f cdk-rancher-nodeport.yaml
+```
+
+If is possible to check the Rancher logs using the following command: 
+
+```
+  kubectl logs -f $(kubectl get po | grep rancher | cut -d ' ' -f1)
+```
 
 ## Conclusion
 
 This documentation has explained how to configure and deploy Canonical Kubernetes with Rancher running on top. It also provided a short introduction on how to use Rancher to control and manage Canonical Kubernetes. Note that this documentation was written at the time of the Rancher 2.0 alpha but a beta release is due out very soon which would be a better release candidate for a production environment. 
+
+
 
 ## Useful Links
 
