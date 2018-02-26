@@ -24,20 +24,6 @@ These steps are currently in alpha/testing phase and will most likely change.
 - [Conclusion](https://github.com/CalvinHartwell/cdk-rancher#conclusion)
 - [Useful Links](https://github.com/CalvinHartwell/cdk-rancher#useful-links)
 
-### Software Versions
-
-The software versions used are: 
- - Kubernetes 1.9.3
- - Rancher v2.0.0-alpha16
-
-### Getting Help & Support
-
-This document was written by [Calvin Hartwell](https://www.linkedin.com/in/calvinhartwell), please feel to drop me an email on [calvin.hartwell@canonical.com](calvin.hartwell@canonical.com). 
-
-To open issues with CDK, please open an issue with the repository here [https://github.com/juju-solutions/bundle-canonical-kubernetes](https://github.com/juju-solutions/bundle-canonical-kubernetes). If you want professional support for Kubernetes please contact Canonical Sales [https://www.ubuntu.com/kubernetes](https://www.ubuntu.com/kubernetes). 
-
-Rancher Provides support through [Slack](https://slack.rancher.io/) and by paid support [https://rancher.com/support/](https://rancher.com/support/). Please contact Rancher directly to get more help with their product. 
-
 ## Deploying Canonical Kubernetes
 
 Deploying Canonical Kubernetes is really easy, I assume you are running on an Ubuntu machine and you have an AWS account.  Grab a new API key from AWS and put that into:
@@ -464,6 +450,20 @@ If is possible to check the Rancher logs using the following command:
 ## Conclusion
 
 This documentation has explained how to configure and deploy Canonical Kubernetes with Rancher running on top. It also provided a short introduction on how to use Rancher to control and manage Canonical Kubernetes. Note that this documentation was written at the time of the Rancher 2.0 alpha but a beta release is due out very soon which would be a better release candidate for a production environment. 
+
+### Software Versions
+
+The software versions used throughout this docunmentation are:
+ - Kubernetes 1.9.3
+ - Rancher v2.0.0-alpha16
+
+### Getting Help & Support
+
+This document was written by [Calvin Hartwell](https://www.linkedin.com/in/calvinhartwell), please feel to drop me an email on [calvin.hartwell@canonical.com](calvin.hartwell@canonical.com).
+
+To open issues with CDK, please open an issue with the repository here [https://github.com/juju-solutions/bundle-canonical-kubernetes](https://github.com/juju-solutions/bundle-canonical-kubernetes). If you want professional support for Kubernetes please contact Canonical Sales [https://www.ubuntu.com/kubernetes](https://www.ubuntu.com/kubernetes).
+
+Rancher Provides support through [Slack](https://slack.rancher.io/) and by paid support [https://rancher.com/support/](https://rancher.com/support/). Please contact Rancher directly to get more help with their product.
 
 ## Useful Links
 
