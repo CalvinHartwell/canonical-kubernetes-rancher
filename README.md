@@ -183,6 +183,7 @@ If you have a custom bundle, you would deploy that using a command like this ins
 Eventually the colours will all turn green and your cluster is good to go. To access the cluster, we need to install the kubectl command line client and copy the kubernetes configuration file over for it to use: 
 
 ```
+ # If this does not work, try adding the --classic option on the end. 
  snap install kubectl
 ```
 
@@ -342,6 +343,8 @@ The workloads interface can also be used to destroy, reprovision, clone and perf
 
 ### Deploying a Workload with Rancher Catalog
 
+**_*Please note: The example here is not working but it is being worked on._**
+
 Rancher can also launch a workload using the Rancher catalog. First hover over the Global option in the top left-hand part of the menu. Once the menu appears, click Default at the bottom to select the Default project. 
 
 First lets add an SSL certificate and private key for use within our default project. First generate your private key and certificate: 
@@ -381,11 +384,13 @@ Hit the Launch button and you should see the list of available app within the Ca
 
 ![rancher gui catalogapps](https://raw.githubusercontent.com/CalvinHartwell/cdk-rancher/master/images/rancher-gui-catalog-apps.png "Rancher Catalog Launch")
 
-Let's try and launch Artifactory. Find JFrog Artifactory in the list of apps and hit View Details. Use the default values and then hit Launcha the bottom of the page: 
+Let's try and launch Artifactory. Find JFrog Artifactory in the list of apps and hit View Details. Use the default values and then hit Launch at the bottom of the page: 
 
 ![rancher gui catalogapps](https://raw.githubusercontent.com/CalvinHartwell/cdk-rancher/master/images/rancher-gui-artifactory.png "Rancher Artifactory Launch")
 
 ### Adding another Cluster to Rancher
+
+It is also possible to add additional clusters to Rancher. This  
 
 ### Troubleshooting 
 
@@ -405,8 +410,6 @@ If is possible to check the Rancher logs using the following command:
 ## Conclusion
 
 This documentation has explained how to configure and deploy Canonical Kubernetes with Rancher running on top. It also provided a short introduction on how to use Rancher to control and manage Canonical Kubernetes. Note that this documentation was written at the time of the Rancher 2.0 alpha but a beta release is due out very soon which would be a better release candidate for a production environment. 
-
-
 
 ## Useful Links
 
