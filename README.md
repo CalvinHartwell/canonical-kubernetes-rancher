@@ -304,13 +304,22 @@ The Rancher GUI has three main views, each of which has its own set of sub-menus
 ![rancher gui cluster page](https://raw.githubusercontent.com/CalvinHartwell/cdk-rancher/master/images/rancher-gui-cluster.png "Rancher Web GUI Cluster")
 
 These are the three main views which contain a set of sub-menus: 
+
 - Global View: Provides a view of each of the Kubernetes clusters under Rancher's control. This provides a break down of Nodes, Node Drivers, Catalogs, Users and Security Settings.   
+
 - Cluster: This provides a view of of an individual Kubernetes cluster. It allows you to download the kubeconfig file for a cluster, check basic cluster stats, namespaces, projects, nodes and users for a particular cluster. 
+
 - Namespace: This provides a view for an individual Namespace defined on a Kubernetes cluster. It allows you to configure workloads, DNS entries, ingress rules, volumes, secrets, registries, certificates and most importantly, the catalog. 
+
+Essentially each of these different views is a drill-down from the top level. The Global view provides a high-level overview for all of the clusters it has control over, where as the namespace view is the lowest level you can drill down into within a cluster. 
 
 ### Deploying a Workload with Rancher
 
+Once Rancher is up and running we can launch a workload on-top using the Rancher catalog. First hover over the Global option in the top left-hand part of the menu. Once the menu appears, click Default to select the Default namespace. 
 
+Next, hit the Catalog Apps button, you should see a screen like this: 
+
+![rancher gui cluster](https://raw.githubusercontent.com/CalvinHartwell/cdk-rancher/master/images/rancher-gui-cluster.png "Rancher Catalog Launch")
 
 ### Adding another Cluster to Rancher
 
