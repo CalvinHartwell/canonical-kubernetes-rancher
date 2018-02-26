@@ -4,6 +4,40 @@ This repository explains how to deploy Rancher 2.0alpha on Canonical Kubernetes.
 
 These steps are currently in alpha/testing phase and will most likely change. 
 
+### Index
+
+- [Canonical Kubernetes with Rancher](https://github.com/CalvinHartwell/cdk-rancher#canonical-kubernetes-with-rancher-cdk-rancher)
+  - [Software versions]()
+  - [Getting Help & Support]()
+- [Deploy Canonical Kubernetes](https://github.com/CalvinHartwell/cdk-rancher#deploy-canonical-kubernetes)
+- [Deploying Rancher](https://github.com/CalvinHartwell/cdk-rancher#deploying-rancher)
+ - [Deploying Rancher with a nodeport](https://github.com/CalvinHartwell/cdk-rancher#deploying-rancher-with-a-nodeport)
+ - [Deploying Rancher with an ingress rule](https://github.com/CalvinHartwell/cdk-rancher#deploying-rancher-with-an-ingress-rule)
+ - [Removing Rancher](https://github.com/CalvinHartwell/cdk-rancher#removing-rancher)
+- [Using Rancher](https://github.com/CalvinHartwell/cdk-rancher#using-rancher)
+ - [The Rancher GUI](https://github.com/CalvinHartwell/cdk-rancher#the-rancher-gui)
+ - [Deploying a Workload with Rancher](https://github.com/CalvinHartwell/cdk-rancher#deploying-a-workload-with-rancher)
+ - [Deploying a Workload with Service and Ingress Rules](https://github.com/CalvinHartwell/cdk-rancher#deploying-a-workload-with-service-and-ingress-rules)
+ - [Deploying a Workload with Rancher Catalog](https://github.com/CalvinHartwell/cdk-rancher#deploying-a-workload-with-rancher-catalog)
+ - [Adding additional Kubernetes Clusters to Rancher](https://github.com/CalvinHartwell/cdk-rancher#adding-additional-kubernetes-clusters-to-rancher)
+ - [Troubleshooting Rancher](https://github.com/CalvinHartwell/cdk-rancher#troubleshooting-rancher)
+- [Conclusion](https://github.com/CalvinHartwell/cdk-rancher#conclusion)
+- [Useful Links](https://github.com/CalvinHartwell/cdk-rancher#useful-links)
+
+### Software Versions
+
+The software versions used are: 
+ - Kubernetes 1.9.3
+ - Rancher v2.0.0-alpha16
+
+### Getting Help & Support
+
+This document was written by Calvin Hartwell, please feel to drop me an email on [calvin.hartwell@canonical.com](calvin.hartwell@canonical.com). 
+
+To open issues with CDK, please open an issue with the repository here [https://github.com/juju-solutions/bundle-canonical-kubernetes](https://github.com/juju-solutions/bundle-canonical-kubernetes). If you want professional support for Kubernetes please contact Canonical Sales [https://www.ubuntu.com/kubernetes](https://www.ubuntu.com/kubernetes). 
+
+Rancher Provides 
+
 ## Deploy Canonical Kubernetes
 
 Deploying Canonical Kubernetes is really easy, I assume you are running on an Ubuntu machine and you have an AWS account.  Grab a new API key from AWS and put that into:
