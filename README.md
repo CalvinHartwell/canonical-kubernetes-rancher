@@ -249,11 +249,41 @@ Now we need to open this nodeport so we can access it. For that, we can use juju
    juju run --unit kubernetes-worker/2 "open-port 30443"
 ```
 
-Rancher can now be accessed on this port through a worker IP or DNS entries if you have created them. Try opening it up in your browser:  
+Rancher can now be accessed on this port through a worker IP or DNS entries if you have created them. It is generally recommended that you create a DNS entry for each of the worker nodes in your cluster. For example, if you have three worker nodes and you own the domain example.com, you could create three A records, one for each worker in the cluster. 
+
+As creating DNS entries is outside of the scope of this document, we will use the freely available xip.io service which can return A records for an IP address which is part of the domain name. For example, if you have the domain rancher.35.178.130.245.xip.io, the xip.io service will automatically return the IP address 35.178.130.245 as an A record which is useful for testing purposes.  For your deployment, the IP address 35.178.130.245 should be replaced with one of your worker IP address, which can be found using Juju or AWS: 
+
+```
+ calvinh@ubuntu-ws:~/Source/cdk-rancher$ juju status
+
+# ... output omitted. 
+
+Unit                      Workload  Agent  Machine  Public address  Ports                     Message
+easyrsa/0*                active    idle   0        35.178.118.232                            Certificate Authority connected.
+etcd/0*                   active    idle   1        35.178.49.31    2379/tcp                  Healthy with 3 known peers
+etcd/1                    active    idle   2        35.177.99.171   2379/tcp                  Healthy with 3 known peers
+etcd/2                    active    idle   3        35.178.125.161  2379/tcp                  Healthy with 3 known peers
+kubeapi-load-balancer/0*  active    idle   4        35.178.37.87    443/tcp                   Loadbalancer ready.
+kubernetes-master/0*      active    idle   5        35.177.239.237  6443/tcp                  Kubernetes master running.
+  flannel/0*              active    idle            35.177.239.237                            Flannel subnet 10.1.27.1/24
+kubernetes-worker/0*      active    idle   6        35.178.130.245  80/tcp,443/tcp,30443/tcp  Kubernetes worker running.
+  flannel/2               active    idle            35.178.130.245                            Flannel subnet 10.1.82.1/24
+kubernetes-worker/1       active    idle   7        35.178.121.29   80/tcp,443/tcp,30443/tcp  Kubernetes worker running.
+  flannel/3               active    idle            35.178.121.29                             Flannel subnet 10.1.66.1/24
+kubernetes-worker/2       active    idle   8        35.177.144.76   80/tcp,443/tcp,30443/tcp  Kubernetes worker running.
+  flannel/1               active    idle            35.177.144.76                        
+
+# Note the IP addresses for the kubernetes-workers in the example above.  You should pick one of the public addresses. 
+```
+
+Try opening up Rancher in your browser using the nodeport and the domain name or ip address:  
 
 ```
   # replace the IP address with one of your Kubernetes worker, find this from juju status command. 
   wget https://35.178.130.245.xip.io:30443 --no-check-certificate
+
+  # this should also work
+  wget https://35.178.130.245:30443 --no-check-certificate 
 ```
 
 If you need to make any changes to the kubernetes configuration file, edit the yaml file and then just use apply again: 
@@ -264,18 +294,75 @@ If you need to make any changes to the kubernetes configuration file, edit the y
 
 ### Deploying Rancher with an ingress rule
 
-**_*Please note: The ingress rule example here is currently not working but is being worked on._**
-
 The cdk-rancher-ingress.yaml yaml file contains an example Kubernetes configuration for deploying Rancher with an ingress rule. If you use an ingress rule, you don't need to use the nodeport or open additional ports using juju. 
 
-However, you do need to modify the example bundle to change the hostname the ingress rule is using: 
+However, you do need to modify the example bundle to change the hostname the ingress rule is using. As Rancher is using SSL/TLS, we also need to setup and configure an SSL certificate for the ingress rule, which will be deployed as a secret in the cluster. First generate a new SSL certificate and private key using OpenSSL, for a production deployment a CA signed certificate is recommended: 
 
 ```
+ calvinh@ubuntu-ws:~/Documents/Rancher$ openssl req -newkey rsa:4096 -nodes -keyout key.pem -x509 -days 365 -out certificate.pem
+Generating a 4096 bit RSA private key
+.....................................................................++
+........................................................................................................++
+writing new private key to 'key.pem'
+-----
+You are about to be asked to enter information that will be incorporated
+into your certificate request.
+What you are about to enter is what is called a Distinguished Name or a DN.
+There are quite a few fields but you can leave some blank
+For some fields there will be a default value,
+If you enter '.', the field will be left blank.
+-----
+Country Name (2 letter code) [AU]:GB
+State or Province Name (full name) [Some-State]:London
+Locality Name (eg, city) []:London
+Organization Name (eg, company) [Internet Widgits Pty Ltd]:Canonical LTD
+Organizational Unit Name (eg, section) []:CPE
+Common Name (e.g. server FQDN or YOUR name) []:35.178.130.245.xip.io
+Email Address []:calvin.hartwell@canonical.com
+```
+
+Next, create a secret within Kubernetes to store the certificate and key: 
+
+```
+  kubectl create secret tls tls-certificate --key key.pem --cert certificate.pem
+```
+
+The hostname in the example should be changed to reflect a resolvable DNS entry for your workers.  It is generally recommended that you create a DNS entry for each of the worker nodes in your cluster. For example, if you have three worker nodes and you own the domain example.com, you could create three A records, one for each worker in the cluster.
+
+As creating DNS entries is outside of the scope of this document, we will use the freely available xip.io service which can return A records for an IP address which is part of the domain name. For example, if you have the domain rancher.35.178.130.245.xip.io, the xip.io service will automatically return the IP address 35.178.130.245 as an A record which is useful for testing purposes.  For your deployment, the IP address 35.178.130.245 should be replaced with one of your worker IP address, which can be found using Juju or AWS:
+
+```
+ calvinh@ubuntu-ws:~/Source/cdk-rancher$ juju status
+
+# ... output omitted. 
+
+Unit                      Workload  Agent  Machine  Public address  Ports                     Message
+easyrsa/0*                active    idle   0        35.178.118.232                            Certificate Authority connected.
+etcd/0*                   active    idle   1        35.178.49.31    2379/tcp                  Healthy with 3 known peers
+etcd/1                    active    idle   2        35.177.99.171   2379/tcp                  Healthy with 3 known peers
+etcd/2                    active    idle   3        35.178.125.161  2379/tcp                  Healthy with 3 known peers
+kubeapi-load-balancer/0*  active    idle   4        35.178.37.87    443/tcp                   Loadbalancer ready.
+kubernetes-master/0*      active    idle   5        35.177.239.237  6443/tcp                  Kubernetes master running.
+  flannel/0*              active    idle            35.177.239.237                            Flannel subnet 10.1.27.1/24
+kubernetes-worker/0*      active    idle   6        35.178.130.245  80/tcp,443/tcp,30443/tcp  Kubernetes worker running.
+  flannel/2               active    idle            35.178.130.245                            Flannel subnet 10.1.82.1/24
+kubernetes-worker/1       active    idle   7        35.178.121.29   80/tcp,443/tcp,30443/tcp  Kubernetes worker running.
+  flannel/3               active    idle            35.178.121.29                             Flannel subnet 10.1.66.1/24
+kubernetes-worker/2       active    idle   8        35.177.144.76   80/tcp,443/tcp,30443/tcp  Kubernetes worker running.
+  flannel/1               active    idle            35.177.144.76
+
+# Note the IP addresses for the kubernetes-workers in the example above.  You should pick one of the public addresses. 
+```
+
+Looking at the output from the juju status above, the Public Address (35.178.130.245) can be used to create a xip.io DNS entry (rancher.35.178.130.245.xip.io) whichs hould be placed into the cdk-rancher-ingress.yaml file. You could also create your own DNS entry as long as it resolves to each of the worker nodes or one of them it will work fine: 
+
+```
+  # Edit this line inside the rancher ingress yaml file
   cat cdk-rancher-ingress.yaml | grep xip.io
   - host: rancher.35.178.130.245.xip.io
 ```
 
-The hostname in the example should be changed to reflect a resolvable DNS entry for your workers. You can use the xip.io service for testing, just change the IP address in the entry to reflect the IP address of one of your workers. Next apply the kubernetes work load:
+Once you've edited the ingress rule to reflect your DNS entries, run the kubectl apply -f cdk-rancher-ingress.yaml to deploy Kubernetes: 
 
 ```
  kubectl apply -f cdk-rancher-ingress.yaml
@@ -366,7 +453,9 @@ The workloads interface can also be used to destroy, reprovision, clone and perf
 
 Typically a workload on-top of Kubernetes should be run with Ingress Rules and Services. The Rancher interface allows us to easily define, manipulate and create these Kubernetes constructs. 
 
-We will start by deploying a new  
+We will start by deploying a new container workload called cdk-cats, the container name is calvinhartwell/cdk-cats:latest
+
+To do this, we 
 
 ### Deploying a Workload with Rancher Catalog
 
