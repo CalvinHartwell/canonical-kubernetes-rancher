@@ -400,9 +400,19 @@ Rancher will now attempt to deploy Artifactory from the Helm Catalogue automatic
 
 It is also possible to add additional clusters to Rancher. This is done by providing Rancher with the kubectl configuration file, which Rancher uses to take control of the additional clusters. Highlight the Global menu in the top-left and press it, and then go to Clusters. You should see a menu like this below: 
 
-![rancher gui catalogapps](https://raw.githubusercontent.com/CalvinHartwell/cdk-rancher/master/images/rancher-gui-artifactory.png "Rancher Artifactory Launch")
+![rancher gui clusters](https://raw.githubusercontent.com/CalvinHartwell/cdk-rancher/master/images/rancher-gui-add-cluster.png "Rancher Artifactory Clusters")
 
-### Troubleshooting 
+Hit the add Cluster button and you should be at another screen which asks you what kind of cluster you'd like to import:
+
+![rancher gui rancher](https://raw.githubusercontent.com/CalvinHartwell/cdk-rancher/master/images/rancher-gui-add-cluster-options.png "Rancher Artifactory Options")
+
+Hit the Import an Existing Cluster option and move onto the next screen: 
+
+![rancher gui clusters](https://raw.githubusercontent.com/CalvinHartwell/cdk-rancher/master/images/rancher-gui-add-cluster-kubectl.png "Rancher Artifactory Kubectl")
+
+This next screen allows you to specify a name for the cluster and provide the kubeconfig file (the same configuration file used for kubectl) which is used to control and authenticate with the cluster. Give the new cluster a name and hit the Read from a file button to import your kubeconfig file or manually copy and paste the contents of the kubeconfig from its file. Note you will nee to SCP this file from your newly provisioned CDK cluster. 
+
+### Troubleshooting Rancher 
 
 If for any reason the Rancher pod becomes unresponsive, you can bounce the pod using the following command:
 
