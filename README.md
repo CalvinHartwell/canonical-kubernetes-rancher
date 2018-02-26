@@ -36,7 +36,7 @@ This document was written by [Calvin Hartwell](https://www.linkedin.com/in/calvi
 
 To open issues with CDK, please open an issue with the repository here [https://github.com/juju-solutions/bundle-canonical-kubernetes](https://github.com/juju-solutions/bundle-canonical-kubernetes). If you want professional support for Kubernetes please contact Canonical Sales [https://www.ubuntu.com/kubernetes](https://www.ubuntu.com/kubernetes). 
 
-Rancher Provides 
+Rancher Provides support through [Slack](https://slack.rancher.io/) and by paid support [https://rancher.com/support/](https://rancher.com/support/). Please contact Rancher directly to get more help with their product. 
 
 ## Deploying Canonical Kubernetes
 
