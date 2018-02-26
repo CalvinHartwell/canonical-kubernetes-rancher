@@ -242,7 +242,7 @@ If you need to make any changes to the kubernetes configuration file, edit the y
 
 ### Deploying Rancher with an ingress rule
 
-*Please note: The ingress rule example here is currently not working but is being worked on.
+**_*Please note: The ingress rule example here is currently not working but is being worked on._**
 
 The cdk-rancher-ingress.yaml yaml file contains an example Kubernetes configuration for deploying Rancher with an ingress rule. If you use an ingress rule, you don't need to use the nodeport or open additional ports using juju. 
 
