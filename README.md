@@ -14,7 +14,6 @@ These steps are currently in alpha/testing phase and will most likely change.
 - [Using Rancher](https://github.com/CalvinHartwell/cdk-rancher#using-rancher)
   - [The Rancher GUI](https://github.com/CalvinHartwell/cdk-rancher#the-rancher-gui)
   - [Deploying a Workload with Rancher](https://github.com/CalvinHartwell/cdk-rancher#deploying-a-workload-with-rancher)
-  - [Deploying a Workload with Service and Ingress Rules](https://github.com/CalvinHartwell/cdk-rancher#deploying-a-workload-with-service-and-ingress-rules)
   - [Deploying a Workload with Rancher Catalog](https://github.com/CalvinHartwell/cdk-rancher#deploying-a-workload-with-rancher-catalog)
   - [Adding additional Kubernetes Clusters to Rancher](https://github.com/CalvinHartwell/cdk-rancher#adding-additional-kubernetes-clusters-to-rancher)
   - [Troubleshooting Rancher](https://github.com/CalvinHartwell/cdk-rancher#troubleshooting-rancher)
