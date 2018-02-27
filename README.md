@@ -299,10 +299,10 @@ The cdk-rancher-ingress.yaml yaml file contains an example Kubernetes configurat
 However, you do need to modify the example bundle to change the hostname the ingress rule is using. As Rancher is using SSL/TLS, we also need to setup and configure an SSL certificate for the ingress rule, which will be deployed as a secret in the cluster. First generate a new SSL certificate and private key using OpenSSL, for a production deployment a CA signed certificate is recommended: 
 
 ```
- calvinh@ubuntu-ws:~/Documents/Rancher$ openssl req -newkey rsa:4096 -nodes -keyout key.pem -x509 -days 365 -out certificate.pem
+calvinh@ubuntu-ws:~/Documents/Rancher$ openssl req -newkey rsa:4096 -nodes -keyout key.pem -x509 -days 365 -out certificate.pem
 Generating a 4096 bit RSA private key
-.....................................................................++
-........................................................................................................++
+.....................................................................................................................................................................................................................................................................................................++
+............................................................................................................................................................................................++
 writing new private key to 'key.pem'
 -----
 You are about to be asked to enter information that will be incorporated
@@ -312,12 +312,12 @@ There are quite a few fields but you can leave some blank
 For some fields there will be a default value,
 If you enter '.', the field will be left blank.
 -----
-Country Name (2 letter code) [AU]:GB
+Country Name (2 letter code) [AU]:UK
 State or Province Name (full name) [Some-State]:London
 Locality Name (eg, city) []:London
 Organization Name (eg, company) [Internet Widgits Pty Ltd]:Canonical LTD
 Organizational Unit Name (eg, section) []:CPE
-Common Name (e.g. server FQDN or YOUR name) []:35.178.130.245.xip.io
+Common Name (e.g. server FQDN or YOUR name) []:rancher.34.241.213.199.xip.io
 Email Address []:calvin.hartwell@canonical.com
 ```
 
