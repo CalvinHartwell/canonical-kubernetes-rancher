@@ -46,14 +46,12 @@ spec:
       creationTimestamp: null
       labels:
         app: rancher
-        ima: pod
     spec:
       containers:
       - image: rancher/server:preview
         imagePullPolicy: Always
         name: rancher
         ports:
-        - containerPort: 80
         - containerPort: 443
         livenessProbe:
           httpGet:
@@ -84,9 +82,13 @@ apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
  name: rancher
+ annotations:
+  nginx.org/ssl-services: "ssl-svc"
 spec:
+ tls:
+ - secretName: tls-certificate      
  rules:
-   - host: rancher.35.178.130.245.xip.io
+   - host: rancher.34.244.118.135.xip.io
      http:
        paths:
          - path: /

@@ -449,14 +449,6 @@ Linux hello-ubuntu 4.4.0-1050-aws #59-Ubuntu SMP Tue Jan 30 19:57:10 UTC 2018 x8
 
 The workloads interface can also be used to destroy, reprovision, clone and perform many other tasks on workloads running on Kubernetes. 
 
-### Deploying a Workload with Service and Ingress Rules
-
-Typically a workload on-top of Kubernetes should be run with Ingress Rules and Services. The Rancher interface allows us to easily define, manipulate and create these Kubernetes constructs. 
-
-We will start by deploying a new container workload called cdk-cats, the container name is calvinhartwell/cdk-cats:latest
-
-To do this, we 
-
 ### Deploying a Workload with Rancher Catalog
 
 Rancher can also launch a workload using the Rancher catalog. First hover over the Global option in the top left-hand part of the menu. Once the menu appears, click Default at the bottom to select the Default project. 
@@ -489,6 +481,12 @@ Email Address []:calvin.hartwell@canonical.com
 This will create two files, certificate.pem and key.pem. Back on the Rancher GUI, go to Resources -> and then Certificates. Give your certificate a name, and import your private key and certificate file either by selecting the files on Disk or by copying and pasting the content into the boxes manually. You can also choose which namespace it should be assigned. Hit the save button when you're done: 
 
 ![rancher certs](https://raw.githubusercontent.com/CalvinHartwell/cdk-rancher/master/images/rancher-gui-add-cert.png "Rancher Add Certs")
+
+We also need to Enable the catalogs. To do this, go to the Global View and hit the Catalogs Button. You should see a screen like this:
+
+![rancher enable catalog](https://raw.githubusercontent.com/CalvinHartwell/cdk-rancher/master/images/rancher-gui-catalogs-enable.png "Rancher Catalogs Enable")
+
+There are two buttons which read Disabled, one for Rancher certified Library and one for Community Contributed. Press both of these to Enable to continue. 
 
 Next, hit the Catalog Apps button, you should see a screen like this: 
 
