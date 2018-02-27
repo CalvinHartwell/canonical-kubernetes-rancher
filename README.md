@@ -459,8 +459,6 @@ To do this, we
 
 ### Deploying a Workload with Rancher Catalog
 
-**_*Please note: The example here is not working but it is being worked on._**
-
 Rancher can also launch a workload using the Rancher catalog. First hover over the Global option in the top left-hand part of the menu. Once the menu appears, click Default at the bottom to select the Default project. 
 
 First lets add an SSL certificate and private key for use within our default project. First generate your private key and certificate: 
