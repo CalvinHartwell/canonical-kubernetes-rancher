@@ -83,10 +83,13 @@ kind: Ingress
 metadata:
  name: rancher
  annotations:
-  nginx.org/ssl-services: "ssl-svc"
+   kubernetes.io/tls-acme: "true"
+   ingress.kubernetes.io/secure-backends: "true"
 spec:
  tls:
- - secretName: tls-certificate      
+   - hosts:
+     - rancher.34.244.118.135.xip.io
+   - secretName: tls-certificate      
  rules:
    - host: rancher.34.244.118.135.xip.io
      http:
