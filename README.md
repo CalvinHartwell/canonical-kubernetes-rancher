@@ -1,4 +1,4 @@
-# This Repository has now moved to an official Canonical repository: [https://github.com/CanonicalLtd/canonical-kubernetes-third-party-integrations/tree/master/cdk-rancher](https://github.com/CanonicalLtd/canonical-kubernetes-third-party-integrations/tree/master/cdk-rancher).
+# This Repository has now moved to an official Canonical repository which can be found here: [cdk-rancher](https://github.com/CanonicalLtd/canonical-kubernetes-third-party-integrations/tree/master/cdk-rancher)
 
 # Canonical Kubernetes with Rancher (cdk-rancher)
 
